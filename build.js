@@ -195,6 +195,8 @@ function getFooterHtml() {
   </footer>`;
 }
 
+const BUILD_VERSION = Date.now().toString(36);
+
 function getHeadInitScript() {
   return `
   <script>
@@ -203,7 +205,137 @@ function getHeadInitScript() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-  </script>`;
+    window.copyCodeBlock = function(btn) {
+      try {
+        var wrapper = btn.closest('.code-block-wrapper');
+        if (!wrapper) return;
+        var codeEl = wrapper.querySelector('pre code');
+        if (!codeEl) return;
+        navigator.clipboard.writeText(codeEl.innerText).then(function() {
+          var orig = btn.innerHTML;
+          btn.innerHTML = '<i class="fas fa-check" style="color: #34d399;"></i> <span>Copied!</span>';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.innerHTML = orig;
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      } catch(e) { console.error('Copy failed:', e); }
+    };
+  </script>
+  <style>
+    /* Critical Code Block & Syntax Highlighting Styles (Guarantees zero FOUC / zero cache lag) */
+    .code-block-wrapper {
+      margin: 1.5rem 0 !important;
+      border-radius: 0.75rem !important;
+      overflow: hidden !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      background-color: #0c0c0e !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+      text-align: left !important;
+    }
+    html:not(.dark) .code-block-wrapper {
+      border-color: #27272a !important;
+      background-color: #18181b !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+    }
+    .code-block-header {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      padding: 0.55rem 0.95rem !important;
+      background-color: #141418 !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+      user-select: none !important;
+    }
+    html:not(.dark) .code-block-header {
+      background-color: #202024 !important;
+      border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+    }
+    .code-block-header-left {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.45rem !important;
+    }
+    .mac-dot {
+      width: 9px !important;
+      height: 9px !important;
+      border-radius: 50% !important;
+      display: inline-block !important;
+    }
+    .mac-dot-red { background-color: #ef4444 !important; opacity: 0.85 !important; }
+    .mac-dot-yellow { background-color: #f59e0b !important; opacity: 0.85 !important; }
+    .mac-dot-green { background-color: #10b981 !important; opacity: 0.85 !important; }
+    .code-lang-badge {
+      margin-left: 0.45rem !important;
+      font-family: 'JetBrains Mono', Menlo, Consolas, monospace !important;
+      font-size: 0.6875rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.05em !important;
+      color: #a1a1aa !important;
+      text-transform: uppercase !important;
+    }
+    .code-copy-btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.35rem !important;
+      padding: 0.25rem 0.6rem !important;
+      font-size: 0.725rem !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-weight: 500 !important;
+      color: #a1a1aa !important;
+      background-color: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 0.375rem !important;
+      cursor: pointer !important;
+      transition: all 0.15s ease !important;
+      user-select: none !important;
+    }
+    .code-copy-btn:hover {
+      color: #f4f4f5 !important;
+      background-color: rgba(255, 255, 255, 0.14) !important;
+      border-color: rgba(255, 255, 255, 0.22) !important;
+    }
+    .code-copy-btn.copied {
+      color: #34d399 !important;
+      background-color: rgba(52, 211, 153, 0.15) !important;
+      border-color: rgba(52, 211, 153, 0.35) !important;
+    }
+    .code-block-wrapper pre {
+      margin: 0 !important;
+      padding: 1.15rem 1.25rem !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      overflow-x: auto !important;
+      font-family: 'JetBrains Mono', Menlo, Consolas, monospace !important;
+      font-size: 0.84rem !important;
+      line-height: 1.7 !important;
+      color: #f4f4f5 !important;
+      tab-size: 2 !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    .code-block-wrapper pre code {
+      background: transparent !important;
+      padding: 0 !important;
+      border: none !important;
+      font-family: inherit !important;
+      font-size: inherit !important;
+      color: inherit !important;
+      white-space: pre !important;
+      word-break: normal !important;
+      word-wrap: normal !important;
+    }
+    .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #71717a !important; font-style: italic !important; }
+    .token.punctuation { color: #94a3b8 !important; }
+    .token.property, .token.tag, .token.constant, .token.symbol, .token.deleted { color: #f87171 !important; }
+    .token.boolean, .token.number { color: #fb923c !important; }
+    .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #34d399 !important; }
+    .token.operator, .token.entity, .token.url { color: #38bdf8 !important; }
+    .token.atrule, .token.attr-value, .token.keyword { color: #818cf8 !important; }
+    .token.function, .token.class-name { color: #fbbf24 !important; }
+    .token.regex, .token.important, .token.variable { color: #f472b6 !important; }
+  </style>`;
 }
 
 async function build() {
@@ -293,7 +425,7 @@ async function build() {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20261010a">
+  <link rel="stylesheet" href="../css/style.css?v=${BUILD_VERSION}">
   ${getHeadInitScript()}
   ${GA_TAG_HTML}
 </head>
@@ -348,7 +480,7 @@ async function build() {
   </main>
 
   ${getFooterHtml()}
-  <script src="../js/main.js?v=20261010a"></script>
+  <script src="../js/main.js?v=${BUILD_VERSION}"></script>
 </body>
 </html>`;
 
@@ -377,7 +509,7 @@ async function build() {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261010a">
+  <link rel="stylesheet" href="css/style.css?v=${BUILD_VERSION}">
   ${getHeadInitScript()}
   ${GA_TAG_HTML}
 </head>
@@ -499,13 +631,20 @@ async function build() {
   </main>
 
   ${getFooterHtml()}
-  <script src="js/main.js?v=20261010a"></script>
+  <script src="js/main.js?v=${BUILD_VERSION}"></script>
 </body>
 </html>`;
 
   fs.writeFileSync(path.join(DIST_DIR, 'index.html'), timelineHtml, 'utf-8');
+  if (!fs.existsSync(path.join(DIST_DIR, 'css'))) fs.mkdirSync(path.join(DIST_DIR, 'css'), { recursive: true });
+  if (!fs.existsSync(path.join(DIST_DIR, 'js'))) fs.mkdirSync(path.join(DIST_DIR, 'js'), { recursive: true });
   fs.copyFileSync(path.join(__dirname, 'src', 'css', 'style.css'), path.join(DIST_DIR, 'css', 'style.css'));
   fs.copyFileSync(path.join(__dirname, 'src', 'js', 'main.js'), path.join(DIST_DIR, 'js', 'main.js'));
+
+  if (!fs.existsSync(path.join(__dirname, 'css'))) fs.mkdirSync(path.join(__dirname, 'css'), { recursive: true });
+  if (!fs.existsSync(path.join(__dirname, 'js'))) fs.mkdirSync(path.join(__dirname, 'js'), { recursive: true });
+  fs.copyFileSync(path.join(__dirname, 'src', 'css', 'style.css'), path.join(__dirname, 'css', 'style.css'));
+  fs.copyFileSync(path.join(__dirname, 'src', 'js', 'main.js'), path.join(__dirname, 'js', 'main.js'));
   fs.writeFileSync(path.join(__dirname, 'index.html'), timelineHtml, 'utf-8');
 
   copyDirRecursive(PUBLIC_DIR, DIST_DIR);
