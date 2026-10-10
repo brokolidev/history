@@ -340,9 +340,6 @@ async function build() {
         <!-- Hero Header -->
         <section class="history-hero">
           <h1 class="history-title">History & Memories</h1>
-          <p class="history-subtitle">
-            과거 네이버 블로그, 페이스북 등 여러 SNS에 남겨졌던 생각과 일상, 소중한 사진 기록들을 한곳에 영구 보존하는 디지털 히스토리 타임라인입니다.
-          </p>
 
           <!-- Realtime Search Bar -->
           <div class="search-container">
