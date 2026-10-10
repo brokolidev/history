@@ -1,0 +1,26 @@
+{
+  "name": "history",
+  "version": "1.0.0",
+  "description": "Personal timeline and memory archive for brokolidev (history.brokolidev.com) powered by Bun & Cloudflare Pages",
+  "type": "module",
+  "scripts": {
+    "build": "bun build.js",
+    "dev": "bun dev-server.js"
+  },
+  "keywords": [
+    "history",
+    "archive",
+    "timeline",
+    "ssg",
+    "markdown",
+    "bun",
+    "cloudflare-pages"
+  ],
+  "author": "Ted Choi <bocalist@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "front-matter": "^4.0.2",
+    "marked": "^15.0.7",
+    "prismjs": "^1.30.0"
+  }
+}

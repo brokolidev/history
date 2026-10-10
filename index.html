@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko" class="h-full antialiased dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090b">
+
+  <title>History & Memories - brokolidev</title>
+  <meta name="title" content="History & Memories - brokolidev">
+  <meta name="description" content="Personal history archive, past memories, essays, and photos from Naver Blog, Facebook, and more by Ted Choi.">
+  <link rel="canonical" href="https://history.brokolidev.com/">
+
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="img/favicon_io/site.webmanifest">
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20261010a">
+  
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KR5V5X1NT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-0KR5V5X1NT');
+  </script>
+</head>
+<body>
+  
+  <!-- Ambient Background Light Effects (Identical to brokolidev.com) -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-outer">
+      <div class="header-inner">
+        <!-- Brand / Logo -->
+        <a href="https://brokolidev.com" class="header-brand">
+          <span>brokoli<span class="text-accent">.dev</span></span>
+        </a>
+
+        <!-- Seamless Navigation Links & Theme Toggle -->
+        <nav class="header-nav">
+          <a href="https://brokolidev.com" class="nav-tab-inactive">
+            <span>Profile</span>
+          </a>
+          <a href="https://blog.brokolidev.com" class="nav-tab-inactive">
+            <span>Blog</span>
+          </a>
+          <a href="/" class="nav-tab-active">
+            <span>History</span>
+          </a>
+
+          <!-- Theme Toggle -->
+          <button type="button" id="theme-toggle" aria-label="Toggle theme" class="theme-btn">
+            <i class="fas fa-sun theme-icon-sun"></i>
+            <i class="fas fa-moon theme-icon-moon"></i>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <div class="main-outer">
+      <div class="main-inner">
+        <!-- Hero Header -->
+        <section class="history-hero">
+          <h1 class="history-title">History & Memories</h1>
+          <p class="history-subtitle">
+            과거 네이버 블로그, 페이스북 등 여러 SNS에 남겨졌던 생각과 일상, 소중한 사진 기록들을 한곳에 영구 보존하는 디지털 히스토리 타임라인입니다.
+          </p>
+
+          <!-- Realtime Search Bar -->
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="search-input" class="search-input" placeholder="키워드, 제목, 본문 검색 (예: 제주, 생각, 일상)...">
+          </div>
+
+          <!-- Dual Filter Bar (Platform & Category) -->
+          <div class="filter-group">
+            <div class="filter-row">
+              <span class="filter-label">Platform</span>
+              <div class="filter-chips">
+                <button type="button" class="chip-btn active" data-filter-source="all">전체 (2)</button>
+                <button type="button" class="chip-btn" data-filter-source="naver">
+                    네이버
+                  </button><button type="button" class="chip-btn" data-filter-source="facebook">
+                    페이스북
+                  </button>
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <span class="filter-label">Category</span>
+              <div class="filter-chips">
+                <button type="button" class="chip-btn active" data-filter-category="all">전체</button>
+                <button type="button" class="chip-btn" data-filter-category="여행/일상">여행/일상</button><button type="button" class="chip-btn" data-filter-category="개발/IT">개발/IT</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Timeline Grouped by Year -->
+        <section class="history-timeline">
+          
+          <div class="year-block" id="year-2018">
+            <div class="year-heading">
+              <span class="year-title">2018</span>
+              <span class="year-count-badge">1</span>
+              <div class="year-divider"></div>
+            </div>
+
+            <div class="entries-list">
+              
+              <div class="history-item is-open" data-slug="2018-07-15-summer-engineering-notes" data-source="facebook" data-category="개발/IT">
+                <div class="history-summary">
+                  <div class="history-summary-left">
+                    <span class="history-date">07.15</span>
+                    <span class="badge-source badge-facebook">Facebook</span>
+                    <span class="history-title-text">한여름 밤의 아키텍처 리팩토링 단상</span>
+                  </div>
+                  <div class="history-summary-right">
+                    <i class="fas fa-chevron-down history-chevron"></i>
+                  </div>
+                </div>
+
+                <div class="history-content">
+                  <div class="history-meta-strip">
+                    <div>
+                      <span>Date: <strong>2018-07-15</strong></span>
+                      <span style="margin: 0 0.5rem; opacity: 0.5;">•</span>
+                      <span>Category: <strong>개발/IT</strong></span>
+                      <span style="margin: 0 0.5rem; opacity: 0.5;">•</span><span>Tags: #아키텍처 #엔지니어링 #개발일기</span>
+                    </div>
+                  </div>
+
+                  <div class="prose-content">
+                    <p>복잡한 시스템일수록 가장 단순한 원칙으로 회귀해야 한다는 것을 매번 배운다.</p>
+<p>오늘 밤도 서비스 병목을 잡기 위해 쿼리를 쪼개고 캐시 계층을 재배치하면서, &#39;화려함보다 견고함&#39;이 엔지니어링의 본질임을 다시 한번 되새긴다.</p>
+<p>페이스북 타임라인에 짧게 남겼던 이 단상이 훗날 내 개발 철학의 단단한 밑거름이 되었다.</p>
+
+                  </div>
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="year-block" id="year-2015">
+            <div class="year-heading">
+              <span class="year-title">2015</span>
+              <span class="year-count-badge">1</span>
+              <div class="year-divider"></div>
+            </div>
+
+            <div class="entries-list">
+              
+              <div class="history-item" data-slug="2015-04-12-jeju-spring-memory" data-source="naver" data-category="여행/일상">
+                <div class="history-summary">
+                  <div class="history-summary-left">
+                    <span class="history-date">04.12</span>
+                    <span class="badge-source badge-naver">Naver Blog</span>
+                    <span class="history-title-text">기억에 남는 2015년 봄 제주 여행의 단상</span>
+                  </div>
+                  <div class="history-summary-right">
+                    <i class="fas fa-chevron-down history-chevron"></i>
+                  </div>
+                </div>
+
+                <div class="history-content">
+                  <div class="history-meta-strip">
+                    <div>
+                      <span>Date: <strong>2015-04-12</strong></span>
+                      <span style="margin: 0 0.5rem; opacity: 0.5;">•</span>
+                      <span>Category: <strong>여행/일상</strong></span>
+                      <span style="margin: 0 0.5rem; opacity: 0.5;">•</span><span>Tags: #제주도 #여행 #봄날 #추억</span>
+                    </div>
+                  </div>
+
+                  <div class="prose-content">
+                    <p>봄바람이 유난히 시원했던 2015년 4월의 제주.</p>
+<p>복잡한 일상을 잠시 내려놓고 우도 앞바다와 성산일출봉 주변 유채꽃길을 천천히 걸었다.<br>바다 냄새와 푸른 파도 소리를 들으며 복잡했던 생각들이 한결 가벼워지는 것을 느꼈던 기억.</p>
+<p>당시 네이버 블로그에 소소하게 적어두었던 이 기록을 다시 읽어보니 그날의 공기가 아직도 생생하게 느껴진다.</p>
+
+                  </div>
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 <strong>brokolidev.com</strong> · History & Memories Archive</p>
+    </div>
+  </footer>
+  <script src="js/main.js?v=20261010a"></script>
+</body>
+</html>
