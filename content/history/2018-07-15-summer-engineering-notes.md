@@ -5,8 +5,8 @@ date: "2018-07-15"
 source: "facebook"
 source_label: "Facebook"
 category: "개발/IT"
-tags: ["아키텍처", "엔지니어링", "개발일기"]
-excerpt: "대규모 트래픽을 견디는 단순한 아키텍처에 대한 페이스북 타임라인 메모."
+tags: ["개발/IT"]
+excerpt: "복잡한 시스템일수록 가장 단순한 원칙으로 회귀해야 한다는 것을 매번 배운다. 오늘 밤도 서비스 병목을 잡기 위해 쿼리를 쪼개고 캐시 계층을 재배치하면서, '화려함보다 견고함'이 엔"
 author: "Ted Choi"
 ---
 
