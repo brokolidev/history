@@ -4,19 +4,53 @@ import { fileURLToPath } from 'url';
 import frontMatter from 'front-matter';
 import { marked } from 'marked';
 import Prism from 'prismjs';
+globalThis.Prism = Prism;
 import loadLanguages from 'prismjs/components/index.js';
 
 try {
-  loadLanguages(['bash', 'json', 'javascript', 'typescript', 'python', 'css']);
-} catch (e) {}
+  loadLanguages([
+    'markup',
+    'css',
+    'javascript',
+    'bash',
+    'php',
+    'nginx',
+    'sql',
+    'python',
+    'yaml',
+    'json',
+    'ini',
+    'docker',
+    'java',
+    'c',
+    'cpp'
+  ]);
+} catch (e) {
+  console.warn('Prism loadLanguages warning:', e);
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Custom marked renderer
+// Custom marked renderer for syntax-highlighted code blocks
 const renderer = new marked.Renderer();
 renderer.code = function ({ text, lang }) {
-  const cleanLang = (lang || '').toLowerCase().trim();
+  const rawLang = (lang || '').toLowerCase().trim();
+  const langAliases = {
+    js: 'javascript',
+    ts: 'typescript',
+    py: 'python',
+    sh: 'bash',
+    shell: 'bash',
+    zsh: 'bash',
+    conf: 'nginx',
+    html: 'markup',
+    xml: 'markup',
+    yml: 'yaml',
+  };
+  const cleanLang = langAliases[rawLang] || rawLang || 'text';
+  const displayLang = (rawLang || cleanLang || 'CODE').toUpperCase();
+
   let highlighted = text;
   if (cleanLang && Prism.languages[cleanLang]) {
     try {
@@ -25,7 +59,23 @@ renderer.code = function ({ text, lang }) {
       highlighted = text;
     }
   }
-  return `<pre><code class="language-${cleanLang || 'text'}">${highlighted}</code></pre>`;
+
+  return `
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    <div class="code-block-header-left">
+      <span class="mac-dot mac-dot-red"></span>
+      <span class="mac-dot mac-dot-yellow"></span>
+      <span class="mac-dot mac-dot-green"></span>
+      <span class="code-lang-badge">${displayLang}</span>
+    </div>
+    <button type="button" class="code-copy-btn" onclick="copyCodeBlock(this)" aria-label="Copy code">
+      <i class="far fa-copy"></i>
+      <span>Copy</span>
+    </button>
+  </div>
+  <pre class="language-${cleanLang}"><code class="language-${cleanLang}">${highlighted}</code></pre>
+</div>`;
 };
 marked.setOptions({ renderer });
 

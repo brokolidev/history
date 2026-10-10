@@ -127,11 +127,35 @@
     }
   }
 
+  // --- 4. Code Block Copy Engine ---
+  function initCodeCopy() {
+    window.copyCodeBlock = function (btn) {
+      const wrapper = btn.closest('.code-block-wrapper');
+      if (!wrapper) return;
+      const codeEl = wrapper.querySelector('pre code');
+      if (!codeEl) return;
+
+      const textToCopy = codeEl.innerText;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check" style="color: #34d399;"></i> <span>Copied!</span>';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch((err) => {
+        console.error('Failed to copy code snippet:', err);
+      });
+    };
+  }
+
   // Bootstrap
   function bootstrap() {
     initTheme();
     initFilters();
     initAccordion();
+    initCodeCopy();
   }
 
   if (document.readyState === 'loading') {
