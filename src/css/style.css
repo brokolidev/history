@@ -257,6 +257,17 @@ html.dark .nav-tab-active {
   border-color: rgba(20, 184, 166, 0.3);
 }
 
+.nav-tab-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-icon-bolt {
+  color: #f59e0b; /* amber-500 */
+  font-size: 10px;
+}
+
 /* Theme Toggle Button */
 .theme-btn {
   display: inline-flex;
